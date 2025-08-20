@@ -1,0 +1,1 @@
+from cookingrecipesExtract import cookingRecipesExtractor

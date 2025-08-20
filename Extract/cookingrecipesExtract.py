@@ -1,9 +1,14 @@
 import requests
-url = "https://ipinfo.io/190.60.194.114/json" #Se cambia la dirección IP dependiendo de la que se quiera ver 
-try:
-    response= requests.get(url)
-    data= response.json()
-    print(data)
+import pandas as pd
+import numpy as np
 
-except:
-    print("Hubo un error")
+class cookingRecipesExtractor:
+    def __init__(self, csv_path):
+        self.csv = csv_path
+
+
+    def queries(self):
+        data = pd.read_csv(self.csv)
+
+    def response():  
+        return data.head(5)  
