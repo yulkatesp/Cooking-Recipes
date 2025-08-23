@@ -1,14 +1,24 @@
-import requests
 import pandas as pd
-import numpy as np
 
-class cookingRecipesExtractor:
-    def __init__(self, csv_path):
-        self.csv = csv_path
+class CookingRecipesExtractor:
+    def __init__(self, csv_path: str):
+        self.csv_path = csv_path
+        self.data = None
 
+    def load(self, nrows: int = None, chunksize: int = None):
+        """Carga el CSV completo o una parte."""
+        if chunksize:
+            self.data = pd.read_csv(self.csv_path, chunksize=chunksize)
+        else:
+            self.data = pd.read_csv(self.csv_path, nrows=nrows)
 
-    def queries(self):
-        data = pd.read_csv(self.csv)
-
-    def response():  
-        return data.head(5)  
+    def head(self, n: int = 5):
+        if self.data is None:
+            raise ValueError("Primero ejecuta load().")
+        
+        if isinstance(self.data, pd.io.parsers.TextFileReader):  
+            # Si es un generator (chunks)
+            chunk = next(self.data)
+            return chunk.head(n)
+        
+        return self.data.head(n)
