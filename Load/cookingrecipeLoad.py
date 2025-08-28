@@ -8,6 +8,6 @@ class CookingRecipesLoader:
     def to_csv(self, output_path):
         try:
             self.df.to_csv(output_path, index=False)
-            print(f"✅ Datos limpios guardados en {output_path}")
+            print(f"💗 Datos limpios guardados en {output_path}")
         except Exception as e:
             print(f"❌ Error al guardar datos: {e}")
