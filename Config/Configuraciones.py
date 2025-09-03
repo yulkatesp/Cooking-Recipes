@@ -7,3 +7,5 @@ class Config:
     
     # Ruta donde guardar dataset limpio
     OUTPUT_PATH = "/workspaces/COOKING-RECIPES/Extract/Files/recipenlg_clean.csv"
+
+    DB_PATH = '/workspaces/COOKING-RECIPES/Extract/Files/recetas.db'  # <- SQLite

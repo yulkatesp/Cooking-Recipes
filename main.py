@@ -3,6 +3,9 @@ from Config.Configuraciones import Config
 from Extract.cookingrecipesExtract import CookingRecipesExtractor
 from Transform.cookingrecipesTransform import CookingRecipesTransformer
 from Load.cookingrecipeLoad import CookingRecipesLoader
+from Extract.cookingrecipesExtract import CookingRecipesExtractor
+from database import Database  
+
 
 def main():
     # Descargar dataset desde Kaggle
@@ -27,6 +30,10 @@ def main():
     loader.to_csv(Config.OUTPUT_PATH)
 
     print("💗 Proceso ETL completado")
+
+    # 4. Guardar en SQLite
+    db = Database(Config.DB_PATH)
+    db.save_dataframe(df_clean, table_name="recetas")
 
 if __name__ == "__main__":
     main()
