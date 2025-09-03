@@ -4,7 +4,7 @@ from Extract.cookingrecipesExtract import CookingRecipesExtractor
 from Transform.cookingrecipesTransform import CookingRecipesTransformer
 from Load.cookingrecipeLoad import CookingRecipesLoader
 from Extract.cookingrecipesExtract import CookingRecipesExtractor
-from database import Database  
+
 
 
 def main():
@@ -17,23 +17,23 @@ def main():
     extractor = CookingRecipesExtractor(Config.INPUT_PATH)
     extractor.load(nrows=5000)  # Cargamos solo 5000 filas para pruebas
     df = extractor.data
-    print("💗 Datos extraídos")
+    print(" 💗 Datos extraídos")
     print(extractor.head(10))
 
     # 2. Transform
     transformer = CookingRecipesTransformer(df)
     df_clean = transformer.clean()
-    print("💗 Datos transformados (limpios)")
+    print(" 💗 Datos transformados (limpios)")
 
     # 3. Load
     loader = CookingRecipesLoader(df_clean)
     loader.to_csv(Config.OUTPUT_PATH)
 
-    print("💗 Proceso ETL completado")
+    print(" 💗 Proceso ETL completado")
 
     # 4. Guardar en SQLite
-    db = Database(Config.DB_PATH)
-    db.save_dataframe(df_clean, table_name="recetas")
+    loader = CookingRecipesLoader(df)
+    loader.to_sqlite()
 
 if __name__ == "__main__":
     main()
