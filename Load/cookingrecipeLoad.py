@@ -1,6 +1,7 @@
 
 from Config.Configuraciones import Config
 import sqlite3
+import os
 
 class CookingRecipesLoader:
 
@@ -12,6 +13,11 @@ class CookingRecipesLoader:
 
     def to_csv(self, output_path):
         try:
+
+            # Asegura que la carpeta exista
+            os.makedirs(os.path.dirname(output_path) or ".", exist_ok=True)
+
+            self.df.to_csv(output_path, index=False)
             self.df.to_csv(output_path, index=False)
             print(f" 💗 Datos limpios guardados en {output_path}")
         except Exception as e:
